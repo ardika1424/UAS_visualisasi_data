@@ -1,6 +1,6 @@
 ---
 title: "UAS VISUALISASI DATA"
-author: "ardika alaudin arsa - Institut Teknologi Statistika dan Bisnis Muhammadiyah"
+author: "ardika alaudin arsa - A3202300038"
 date: "`r Sys.Date()`"
 output: 
   html_document:
@@ -14,7 +14,152 @@ output:
 bibliography: references.bib
 ---
 
-# arsaaa uuuuu aiu
+
+```{r}
+library(readr)
+library(readxl)
+library(gganimate)
+library(plotly)
+Data <- read_xlsx("Data.xlsx")
+```
+
+# Tahapan Pembuatan Grafik
+
+Pembuatan grafik melibatkan beberapa tahapan, mulai dari persiapan data hingga presentasi grafik yang efektif. Berikut adalah tahapan dalam pembuatan grafik:
+
+## 1. Persiapan Data
+- Pengumpulan Data: Kumpulkan data yang relevan dari sumber terpercaya.
+- Pembersihan Data: Pastikan data bebas dari kesalahan, seperti data duplikat, data kosong, atau                            nilai yang tidak masuk akal.
+- Strukturisasi Data: Susun data dalam format yang sesuai, seperti tabel atau lembar kerja                                    (misalnya, Excel atau Google Sheets).
+
+## 2. Pemilihan Jenis Grafik
+- Tentukan Tujuan: Tentukan pesan atau informasi yang ingin disampaikan.
+- Pilih Grafik yang Tepat:
+- Grafik Batang: Untuk perbandingan antar kategori.
+- Grafik Garis: Untuk menunjukkan tren seiring waktu.
+- Diagram Lingkaran: Untuk menunjukkan proporsi atau persentase.
+- Histogram: Untuk distribusi data.
+- Scatter Plot: Untuk menunjukkan hubungan antar dua variabel.
+
+## 3. Pembuatan Grafik
+- Gunakan Alat yang Tepat: Pilih alat atau software untuk membuat grafik, seperti:
+   Microsoft Excel,
+   Google Sheets,
+   Tableau,
+   Python (Matplotlib, Seaborn),
+   R (ggplot2),
+- Masukkan Data: Masukkan data Anda ke dalam alat yang dipilih.
+- Sesuaikan Parameter Grafik: Atur skala, sumbu, label, warna, dan elemen lain yang diperlukan.
+
+## 4. Penyempurnaan Grafik
+- Tambahkan Elemen Pendukung:
+   Judul grafik yang informatif,
+   Label pada sumbu (X dan Y),
+   Legenda, jika diperlukan,
+   Garis bantu atau anotasi,
+- Periksa Keseimbangan Visual:
+   Hindari elemen yang terlalu ramai,
+   Gunakan warna yang kontras namun tidak mencolok,
+
+## 5. Analisis dan Interpretasi
+- Tinjau grafik untuk memastikan data yang ditampilkan sesuai dengan tujuan.
+- Pastikan grafik mudah dipahami oleh audiens yang dituju.
+
+## 6. Presentasi Grafik
+- Kontekstualisasi Grafik: Tambahkan deskripsi atau narasi untuk menjelaskan grafik.
+- Pilih Media Penyampaian: Gunakan presentasi slide, laporan, atau infografis untuk menampilkan grafik.
+- Kumpulkan Feedback: Tanyakan kepada audiens apakah grafik sudah jelas dan efektif.
+
+
+# 1.Grafik Univariat (Histogram)
+
+```{r}
+library(ggplot2)
+library(readxl)
+
+ggplot(Data, aes(x = Angka_Harapan_Hidup)) +
+  geom_histogram(binwidth = 5, fill = "skyblue", color = "black") +
+  labs(
+    title = "Distribusi Angka Harapan Hidup",
+    x = "Angka Harapan Hidup",
+    y = "Frekuensi"
+  ) +
+  theme_minimal()
+```
+
+# 2. Grafik Bar (Bar chart Vertikal)
+
+```{r}
+ggplot(Data,aes( x = Benua, y = Jumlah_anak, fill = Benua))+
+  geom_bar(stat = "identity",)+
+  labs (title="Jumlah Anak Per Benua",x= "Benua" ,y="Jumlah anak")
+
+```
+
+# 3. Grafik Multivariat (Heatmap)
+
+```{r}
+library(ggplot2)
+ggplot(Data, aes(x = Tahun, y = Benua, fill = Angka_Harapan_Hidup)) +
+  geom_tile() +
+  scale_fill_gradient(low = "blue", high = "red") +
+  labs(
+    title = " ",
+    x = "Tahun",
+    y = "Benua",
+    fill = "Jumlah anak"
+  ) +
+  theme_minimal()
+
+
+```
+
+# 4. Grafik Interaktif (Bar Chart Horizontal)
+
+```{r}
+# Muat library
+library(ggplot2)
+library(gganimate)
+library(dplyr)
+library(readxl)
+```
+```{r}
+library(plotly)
+library(dplyr)
+library(readxl)
+
+# Baca data dari file Excel
+data <- read_excel("Data.xlsx")
+
+# Filter data (ambil top 10 negara per tahun berdasarkan Pendapatan_per_kapita)
+data_filtered <- data %>%
+  group_by(Tahun) %>%
+  arrange(desc(Pendapatan_per_kapita)) %>%
+  slice_head(n = 10) %>%
+  ungroup()
+
+# Buat grafik animasi menggunakan plotly
+fig <- data_filtered %>%
+  plot_ly(
+    x = ~Pendapatan_per_kapita,
+    y = ~reorder(Negara, Pendapatan_per_kapita),
+    frame = ~Tahun,
+    color = ~Benua,
+    type = "bar",
+    orientation = "h"
+  ) %>%
+  layout(
+    title = "Pendapatan per Kapita per Tahun",
+    xaxis = list(title = "Pendapatan per Kapita"),
+    yaxis = list(title = "Negara"),
+    barmode = "stack"
+  )
+
+# Tampilkan grafik
+fig
+```
+
+
 
 ```{=html}
 <style>
