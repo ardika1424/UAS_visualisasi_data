@@ -159,7 +159,19 @@ fig <- data_filtered %>%
 fig
 ```
 
+# Kesimpulan Grafik:
 
+- Histogram (Univariat):
+  Menunjukkan distribusi Angka Harapan Hidup. Mayoritas data berada dalam rentang tertentu (misalnya,     60-80).
+
+- Bar Chart Vertikal:
+  Memperlihatkan jumlah anak per benua. Benua dengan jumlah anak terbanyak dan terkecil dapat             diidentifikasi.
+
+- Heatmap (Multivariat):
+  Menggambarkan hubungan Tahun, Benua, dan Angka Harapan Hidup. Pola peningkatan atau perbedaan antar     benua dapat dianalisis.
+
+- Bar Chart Horizontal (Interaktif):
+  Menunjukkan tren Pendapatan per Kapita 10 negara teratas secara tahunan. Negara dengan posisi           konsisten atau fluktuasi signifikan dapat diamati.
 
 ```{=html}
 <style>
