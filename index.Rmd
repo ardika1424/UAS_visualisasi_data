@@ -104,7 +104,7 @@ ggplot(Data, aes(x = Tahun, y = Benua, fill = Angka_Harapan_Hidup)) +
   geom_tile() +
   scale_fill_gradient(low = "blue", high = "red") +
   labs(
-    title = " ",
+    title = "Jumlah anak per benua",
     x = "Tahun",
     y = "Benua",
     fill = "Jumlah anak"
